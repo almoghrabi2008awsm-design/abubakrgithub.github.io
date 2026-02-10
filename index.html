@@ -3,15 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <title>مشروع الحب ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #ffe6f0;
+      color: #b30059;
+      padding-top: 50px;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    /* تأثير القلوب المتحركة */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff1a75;
+      transform: rotate(45deg);
+      animation: floatUp 3s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff1a75;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
+
+    @keyframes floatUp {
+      0% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
+      100% { transform: translate(-50px, -300px) rotate(45deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ✨ هذا القسم لتعديل الاسم والتاريخ بسهولة -->
   <h1>❤️ WEDODY ❤️</h1>
   <p>تعارفنا يوم: 23 / 10 / 2025</p>
-
-  <!-- إذا تحب، ممكن تضيف رسالة حب تحت -->
   <p id="love-message">أنا أحبك من كل قلبي 💖</p>
+
+  <div class="hearts"></div>
+
+  <script>
+    // إنشاء قلوب متحركة بشكل عشوائي
+    const heartsContainer = document.querySelector('.hearts');
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'px';
+      heart.style.animationDuration = 2 + Math.random() * 2 + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
 
 </body>
 </html>
