@@ -2,27 +2,30 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>مشروع الحب ❤️</title>
+  <title>Wedody ❤️</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #ffe6f0;
+      background: linear-gradient(to bottom, #ffe6f0, #ffb3d1);
       color: #b30059;
       padding-top: 50px;
     }
-
-    h1 {
-      font-size: 50px;
-      margin-bottom: 10px;
+    h1 { font-size: 50px; margin-bottom: 10px; }
+    p { font-size: 24px; margin: 10px 0; }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #ff3399;
+      color: white;
     }
+    .hidden { display: none; }
 
-    p {
-      font-size: 24px;
-      margin: 10px 0;
-    }
-
-    /* تأثير القلوب المتحركة */
+    /* تأثير القلوب */
     .hearts {
       position: fixed;
       top: 0;
@@ -31,7 +34,6 @@
       pointer-events: none;
       z-index: 9999;
     }
-
     .heart {
       position: absolute;
       width: 20px;
@@ -40,7 +42,6 @@
       transform: rotate(45deg);
       animation: floatUp 3s linear infinite;
     }
-
     .heart::before,
     .heart::after {
       content: "";
@@ -50,28 +51,73 @@
       background-color: #ff1a75;
       border-radius: 50%;
     }
-
     .heart::before { top: -10px; left: 0; }
     .heart::after { top: 0; left: -10px; }
-
     @keyframes floatUp {
-      0% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
-      100% { transform: translate(-50px, -300px) rotate(45deg); opacity: 0; }
+      0% { transform: translate(0,0) rotate(45deg); opacity: 1; }
+      100% { transform: translate(-50px,-300px) rotate(45deg); opacity: 0; }
+    }
+
+    /* صور الحب */
+    .love-img {
+      width: 250px;
+      margin: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #ff99cc;
+    }
+
+    /* قلب مكسور */
+    .broken-heart {
+      font-size: 80px;
+      color: #ff0033;
+      margin-top: 50px;
+      animation: shake 0.5s infinite;
+    }
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(10deg); }
+      50% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
     }
   </style>
 </head>
 <body>
 
-  <h1>❤️ WEDODY ❤️</h1>
-  <p>تعارفنا يوم: 23 / 10 / 2025</p>
-  <p id="love-message">أنا أحبك من كل قلبي 💖</p>
+  <h1>Wedody ❤️</h1>
+  <p>تعارفنا يوم: 01 / 01 / 2025</p>
+
+  <p>هل تحبيني؟</p>
+  <button onclick="answerYes()">نعم</button>
+  <button onclick="answerNo()">لا</button>
+
+  <div id="love-section" class="hidden">
+    <p>
+      أنت النور الذي يضيء قلبي،  
+      أفكاري دائماً معك،  
+      كل لحظة بدونك تبدو طويلة،  
+      كل ابتسامة منك تملأ حياتي سعادة،  
+      أحبك أكثر مما يمكن للكلمات أن تصفه ❤️
+    </p>
+    <img class="love-img" src="https://i.ibb.co/2Fj0kNQ/love1.jpg" alt="حب">
+    <img class="love-img" src="https://i.ibb.co/0JrVQ2Z/love2.jpg" alt="حب">
+    <img class="love-img" src="https://i.ibb.co/YR8yFGS/love3.jpg" alt="حب">
+    <br>
+    <audio controls autoplay loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div id="no-section" class="hidden">
+    <div class="broken-heart">💔</div>
+  </div>
 
   <div class="hearts"></div>
 
   <script>
-    // إنشاء قلوب متحركة بشكل عشوائي
+    // تأثير القلوب العشوائية
     const heartsContainer = document.querySelector('.hearts');
-
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
@@ -80,8 +126,21 @@
       heartsContainer.appendChild(heart);
       setTimeout(() => heart.remove(), 4000);
     }
-
     setInterval(createHeart, 300);
+
+    // رد على الإجابة
+    function answerYes() {
+      document.getElementById('love-section').classList.remove('hidden');
+      document.querySelector('button:nth-of-type(1)').style.display='none';
+      document.querySelector('button:nth-of-type(2)').style.display='none';
+      document.getElementById('no-section').classList.add('hidden');
+    }
+    function answerNo() {
+      document.getElementById('no-section').classList.remove('hidden');
+      document.querySelector('button:nth-of-type(1)').style.display='none';
+      document.querySelector('button:nth-of-type(2)').style.display='none';
+      document.getElementById('love-section').classList.add('hidden');
+    }
   </script>
 
 </body>
