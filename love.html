@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedody ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:black;
+color:white;
+overflow:hidden;
+position:relative;
+}
+
+/* شاشة كلمة السر */
+.lock-screen{text-align:center;}
+input{
+padding:12px;
+border-radius:25px;
+border:none;
+width:220px;
+text-align:center;
+font-size:16px;
+margin-top:15px;
+}
+button{
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:gold;
+color:black;
+margin-top:15px;
+cursor:pointer;
+transition:0.3s;
+font-weight:bold;
+}
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px gold;
+}
+
+/* الصفحة الرئيسية */
+.main{
+display:none;
+text-align:center;
+animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:scale(0.8);}
+to{opacity:1; transform:scale(1);}
+}
+
+/* عداد الحب */
+.counter{
+margin:15px 0;
+font-size:18px;
+color:#ff9ad5;
+}
+
+/* الرسالة السرية */
+.secret{
+margin-top:25px;
+font-size:18px;
+color:gold;
+opacity:0;
+transition:1s;
+line-height:1.6;
+text-align:center;
+}
+
+/* قلوب تطير */
+.heart{
+position:absolute;
+color:red;
+animation:float 6s linear infinite;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh) scale(0.5);opacity:1;}
+100%{transform:translateY(-10vh) scale(1.2);opacity:0;}
+}
+
+/* انفجار قلوب */
+.heart-explode{
+position:absolute;
+color:#ff4e8a;
+font-size:25px;
+animation:explode 0.8s forwards;
+}
+@keyframes explode{
+0%{opacity:1;transform:scale(0);}
+100%{opacity:0;transform:scale(1.5);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- شاشة كلمة السر -->
+<div class="lock-screen" id="lock">
+<h2>ادخلي كلمة السر ❤️</h2>
+<input type="password" id="password" placeholder="••••••••">
+<br>
+<button onclick="checkPassword()">دخول</button>
+<p id="error" style="color:red;margin-top:10px;"></p>
+</div>
+
+<!-- الصفحة الرئيسية -->
+<div class="main" id="mainContent">
+<h1>من يوم 23 / 10 / 2025 ❤️</h1>
+<div class="counter" id="counter"></div>
+<div class="secret" id="secretMessage"></div>
+
+<!-- موسيقى -->
+<audio id="loveMusic" loop>
+<source src="PUT-MP3-LINK-HERE" type="audio/mpeg">
+</audio>
+</div>
+
+<script>
+/* كلمة السر */
+function checkPassword(){
+const pass=document.getElementById("password").value;
+if(pass==="18/12/2009"){
+document.getElementById("lock").style.display="none";
+document.getElementById("mainContent").style.display="block";
+
+/* موسيقى */
+document.getElementById("loveMusic").play();
+
+/* عداد الحب */
+startCounter();
+
+/* انفجار قلوب عند الدخول */
+explodeHearts();
+
+/* ظهور رسالة بعد 2 ثواني */
+setTimeout(startTyping,2000);
+}else{
+document.getElementById("error").innerText="كلمة السر غلط 😅";
+}
+}
+
+/* عداد الحب */
+function startCounter(){
+function update(){
+const startDate=new Date("2025-10-23T00:00:00");
+const now=new Date();
+const diff=now-startDate;
+
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff/(1000*60*60))%24);
+const minutes=Math.floor((diff/(1000*60))%60);
+
+document.getElementById("counter").innerHTML=
+days+" يوم ❤️ "+hours+" ساعة ❤️ "+minutes+" دقيقة";
+}
+update();
+setInterval(update,1000);
+}
+
+/* انفجار قلوب عند الدخول */
+function explodeHearts(){
+for(let i=0;i<30;i++){
+const heart=document.createElement("div");
+heart.className="heart-explode";
+heart.style.left=Math.random()*100+"vw";
+heart.style.top=Math.random()*100+"vh";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},800);
+}
+}
+
+/* توليد قلوب عشوائية مستمرة */
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHeart,300);
+
+/* كتابة الرسالة حرف حرف */
+const text=[
+"انتي كل شيء في حياتي 💖",
+"وجودك يملأ قلبي فرحاً 🌹",
+"كل لحظة معك لا تقدر بثمن 💕",
+"ضحكتك تضيء أيامي ☀️",
+"أحبك أكثر مما تتخيل 😍",
+"أنت ملهمتي وسعادتي 🌸",
+"معك أشعر أن العالم جميل ✨",
+"قلبي ملكك وحدك ❤️",
+"أعدك أن أكون دائماً بجانبك 🤗",
+"انتي حبي وكل حياتي 💘"
+];
+let line=0;
+let charIndex=0;
+
+function startTyping(){
+if(line<text.length){
+if(charIndex<text[line].length){
+document.getElementById("secretMessage").innerHTML+=text[line].charAt(charIndex);
+charIndex++;
+setTimeout(startTyping,50);
+}else{
+document.getElementById("secretMessage").innerHTML+="<br>";
+line++;
+charIndex=0;
+setTimeout(startTyping,500);
+}
+}
+}
+</script>
+
+</body>
+</html>
